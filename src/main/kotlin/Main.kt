@@ -1,7 +1,9 @@
 fun main() {
     val deck = createDeck()
+
+    // Currently printing the cards in the deck
     for (card in deck) {
-        println(card.toString())
+        println(card)
     }
 }
 
