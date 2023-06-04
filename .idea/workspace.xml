@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c0668c2-b813-4653-82b4-65bcdce1571f" name="Changes" comment="Doc: added documentation to main">
+    <list default="true" id="1c0668c2-b813-4653-82b4-65bcdce1571f" name="Changes" comment="feat: add function to randomize cards in deck">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
     </list>
@@ -65,12 +65,20 @@
       <option name="project" value="LOCAL" />
       <updated>1685731881763</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat: add function to randomize cards in deck">
+      <created>1685902014924</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1685902014924</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: create deck of play cards" />
     <MESSAGE value="Doc: added documentation to main" />
-    <option name="LAST_COMMIT_MESSAGE" value="Doc: added documentation to main" />
+    <MESSAGE value="feat: add function to randomize cards in deck" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add function to randomize cards in deck" />
   </component>
 </project>

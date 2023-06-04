@@ -53,11 +53,34 @@ fun createDeck(): List<Card> {
     return deck
 }
 
-// ShuffleDeck returns the list of cards in a random order
+// shuffleDeck returns the list of cards in a random order
 fun shuffleDeck(deck: List<Card>): List<Card> {
     return deck.shuffled()
 }
 
-// Deck class - a list property to store the cards.
 // Player class - player's name and hand (a list of cards).
+class Player(
+    val name: String,
+    private val hand: MutableList<Card>,
+) {
+    fun showHand() {
+        println(hand)
+    }
+
+    fun drawCard(card: Card) {
+        hand.add(card)
+    }
+
+    // need playCard function to take a card that the user inputs
+    // confirm user has card
+    // remove card from the users hand
+    fun playCard(card: Card) {
+        hand.remove(card)
+    }
+
+    fun cardsLeft(): Int {
+        return hand.size
+    }
+
+}
 // Game class - players, the current player, and the current card on the table.
