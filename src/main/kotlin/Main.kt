@@ -1,11 +1,13 @@
 fun main() {
-    val deck = createDeck()
-    val shuffledDeck = shuffleDeck(deck)
+    val player1 = Player("Player 1", mutableListOf())
+    val player2 = Player("Player 2", mutableListOf(), isComputer = true)
+    val players = listOf(player1, player2)
 
-    // Currently printing the cards in the deck
-    for (card in shuffledDeck) {
-        println(card)
-    }
+    val game = Game(players)
+    game.startGame()
+    // Testing that player one and player two have 7 different cards
+    println(player1.showHand())
+    println(player2.showHand())
 }
 
 enum class CardType {
@@ -54,14 +56,15 @@ fun createDeck(): List<Card> {
 }
 
 // shuffleDeck returns the list of cards in a random order
-fun shuffleDeck(deck: List<Card>): List<Card> {
-    return deck.shuffled()
+fun shuffleDeck(deck: List<Card>): MutableList<Card> {
+    return deck.shuffled().toMutableList()
 }
 
 // Player class - player's name and hand (a list of cards).
 class Player(
     val name: String,
     private val hand: MutableList<Card>,
+    val isComputer: Boolean = false,
 ) {
     fun showHand() {
         println(hand)
@@ -83,4 +86,22 @@ class Player(
     }
 
 }
+
 // Game class - players, the current player, and the current card on the table.
+class Game(
+    private val players: List<Player>
+) {
+    // startGame creates a deck, shuffles it and then deals 7 cards to each player
+    fun startGame() {
+        val deck = createDeck()
+        val shuffledDeck = shuffleDeck(deck)
+
+        for (player in players) {
+            var count: Int = 0
+            while (count < 7) {
+                player.drawCard(shuffledDeck.removeAt(0))
+                count++
+            }
+        }
+    }
+}
