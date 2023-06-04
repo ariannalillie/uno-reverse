@@ -4,10 +4,11 @@ fun main() {
     val players = listOf(player1, player2)
 
     val game = Game(players)
-    game.startGame()
+    game.setUpGame()
     // Testing that player one and player two have 7 different cards
-    println(player1.showHand())
-    println(player2.showHand())
+//    println(player1.showHand())
+//    println(player2.showHand())
+    game.playGame()
 }
 
 enum class CardType {
@@ -70,6 +71,10 @@ class Player(
         println(hand)
     }
 
+    fun showCurrentCard(index: Int): Card {
+        return hand[index]
+    }
+
     fun drawCard(card: Card) {
         hand.add(card)
     }
@@ -91,17 +96,33 @@ class Player(
 class Game(
     private val players: List<Player>
 ) {
+    val currentPlayer = players[0]
+
     // startGame creates a deck, shuffles it and then deals 7 cards to each player
-    fun startGame() {
+    fun setUpGame() {
         val deck = createDeck()
         val shuffledDeck = shuffleDeck(deck)
 
         for (player in players) {
-            var count: Int = 0
+            var count = 0
             while (count < 7) {
                 player.drawCard(shuffledDeck.removeAt(0))
                 count++
             }
         }
+    }
+    fun playGame() {
+//        while(true) {
+           println("The current player is ${currentPlayer.name}")
+            if (currentPlayer.isComputer === false) {
+                println("Your cards are: ${currentPlayer.showHand()}")
+            }
+            print("Enter the index of the card you would like to play: ")
+            val cardIndex: Int = readln().toInt()
+
+            if (cardIndex is Int) {
+                println("The card you choose is: ${currentPlayer.showCurrentCard(cardIndex)}")
+            }
+//        }
     }
 }
