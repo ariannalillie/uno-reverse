@@ -1,8 +1,9 @@
 fun main() {
     val deck = createDeck()
+    val shuffledDeck = shuffleDeck(deck)
 
     // Currently printing the cards in the deck
-    for (card in deck) {
+    for (card in shuffledDeck) {
         println(card)
     }
 }
@@ -50,6 +51,11 @@ fun createDeck(): List<Card> {
         }
     }
     return deck
+}
+
+// ShuffleDeck returns the list of cards in a random order
+fun shuffleDeck(deck: List<Card>): List<Card> {
+    return deck.shuffled()
 }
 
 // Deck class - a list property to store the cards.
