@@ -77,15 +77,17 @@ class Player(
         hand.add(card)
     }
 
-    // need playCard function to take a card that the user inputs
-    // confirm user has card
-    // remove card from the users hand
-    fun playCard(card: Card) {
-        hand.remove(card)
-    }
-
     fun cardsLeft(): Int {
         return hand.size
+    }
+
+    fun playCard(index: Int, currentCard: Card) {
+        if (hand[index].color == currentCard.color || hand[index].type == currentCard.type) {
+            hand.remove(hand[index])
+            println("This is a valid move")
+        } else {
+            println("This is not a valid move")
+        }
     }
 
 }
@@ -96,6 +98,7 @@ class Game(
 ) {
     var currentPlayer = players[0]
     var gameOver = false
+    var currentCard: Card? = null
 
     // startGame creates a deck, shuffles it and then deals 7 cards to each player
     fun setUpGame() {
@@ -109,17 +112,21 @@ class Game(
                 count++
             }
         }
+        currentCard = shuffledDeck.removeAt(0)
     }
 
     fun playGame() {
         while (!gameOver) {
             println("The current player is ${currentPlayer.name}")
+            println("The current card on the table is: ${currentCard.toString()}")
             if (!currentPlayer.isComputer) {
                 println("Your cards are: ${currentPlayer.showHand()}")
                 print("Enter the index of the card you would like to play: ")
                 val cardIndex: Int = readln().toInt()
                 println("The card you choose is: ${currentPlayer.showCurrentCard(cardIndex)}")
+                currentPlayer.playCard(cardIndex, currentCard!!)
             }
+
 
             // Swap current player
             currentPlayer = if (currentPlayer === players[0]) players[1] else players[0]
@@ -130,11 +137,15 @@ class Game(
     // anyone has won yet, and if so sets `gameOver` to true
     fun checkForWin() {
         if (players[0].cardsLeft() == 0) {
-            gameOver = true;
+            gameOver = true
             println("Congrats! You win 🎉")
         } else if (players[1].cardsLeft() == 0) {
-            gameOver = true;
+            gameOver = true
             println("The computer wins this round, better luck next time!")
         }
     }
 }
+
+
+// IDEAS
+// add ASCII art or colored output to display the current card
