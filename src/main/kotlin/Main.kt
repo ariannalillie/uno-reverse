@@ -5,10 +5,8 @@ fun main() {
 
     val game = Game(players)
     game.setUpGame()
-    // Testing that player one and player two have 7 different cards
-//    println(player1.showHand())
-//    println(player2.showHand())
     game.playGame()
+    game.checkForWin()
 }
 
 enum class CardType {
@@ -96,7 +94,8 @@ class Player(
 class Game(
     private val players: List<Player>
 ) {
-    val currentPlayer = players[0]
+    var currentPlayer = players[0]
+    var gameOver = false
 
     // startGame creates a deck, shuffles it and then deals 7 cards to each player
     fun setUpGame() {
@@ -111,18 +110,31 @@ class Game(
             }
         }
     }
-    fun playGame() {
-//        while(true) {
-           println("The current player is ${currentPlayer.name}")
-            if (currentPlayer.isComputer === false) {
-                println("Your cards are: ${currentPlayer.showHand()}")
-            }
-            print("Enter the index of the card you would like to play: ")
-            val cardIndex: Int = readln().toInt()
 
-            if (cardIndex is Int) {
+    fun playGame() {
+        while (!gameOver) {
+            println("The current player is ${currentPlayer.name}")
+            if (!currentPlayer.isComputer) {
+                println("Your cards are: ${currentPlayer.showHand()}")
+                print("Enter the index of the card you would like to play: ")
+                val cardIndex: Int = readln().toInt()
                 println("The card you choose is: ${currentPlayer.showCurrentCard(cardIndex)}")
             }
-//        }
+
+            // Swap current player
+            currentPlayer = if (currentPlayer === players[0]) players[1] else players[0]
+        }
+    }
+
+    // checkForWin checks to see if either the player or the computer has an empty hand to determine if
+    // anyone has won yet, and if so sets `gameOver` to true
+    fun checkForWin() {
+        if (players[0].cardsLeft() == 0) {
+            gameOver = true;
+            println("Congrats! You win 🎉")
+        } else if (players[1].cardsLeft() == 0) {
+            gameOver = true;
+            println("The computer wins this round, better luck next time!")
+        }
     }
 }
