@@ -4,6 +4,9 @@ fun main() {
     val players = listOf(player1, player2)
 
     val game = Game(players)
+    player1.game = game
+    player2.game = game
+
     game.setUpGame()
     game.playGame()
     game.checkForWin()
@@ -64,6 +67,7 @@ class Player(
     val name: String,
     private val hand: MutableList<Card>,
     val isComputer: Boolean = false,
+    var game: Game? = null
 ) {
     fun showHand() {
         println(hand)
@@ -82,14 +86,35 @@ class Player(
     }
 
     fun playCard(index: Int, currentCard: Card) {
-        if (hand[index].color == currentCard.color || hand[index].type == currentCard.type) {
-            hand.remove(hand[index])
+        val selectedCard = hand[index]
+
+        if (selectedCard.color == currentCard.color || selectedCard.type == currentCard.type) {
+            hand.removeAt(index)
             println("This is a valid move")
+            game?.updateCurrentCard(selectedCard)
         } else {
             println("This is not a valid move")
         }
     }
 
+    fun computerMove() {
+        // check for playable cards
+        // hand example [GREEN_NUM_5, RED_NUM_8, RED_NUM_3, YELLOW_SKIP, RED_NUM_1, YELLOW_NUM_2, BLUE_REVERSE]
+        // current card YELLOW_NUM_8
+        // 3 playable cards: RED_NUM_8, YELLOW_SKIP, YELLOW_NUM_2
+        // EASY: finds three playable cards and randomly chooses one
+        val currentCardType = game?.currentCard?.type
+        val currentCardColor = game?.currentCard?.color
+        val playableCards = hand.filter { card -> card.type == currentCardType || card.color == currentCardColor }
+
+        if (playableCards.isNotEmpty()) {
+            val cardPicked = playableCards.random()
+            game?.updateCurrentCard(cardPicked)
+            val cardIndex = hand.indexOf(cardPicked)
+            hand.removeAt(cardIndex)
+            println("NEW HAND: $hand")
+        }
+    }
 }
 
 // Game class - players, the current player, and the current card on the table.
@@ -116,21 +141,30 @@ class Game(
     }
 
     fun playGame() {
+        players.forEach { player -> player.game = this }
+
         while (!gameOver) {
             println("The current player is ${currentPlayer.name}")
             println("The current card on the table is: ${currentCard.toString()}")
             if (!currentPlayer.isComputer) {
                 println("Your cards are: ${currentPlayer.showHand()}")
-                print("Enter the index of the card you would like to play: ")
+                print("Enter the index of the card you would like to play, or type -1 to draw: ")
                 val cardIndex: Int = readln().toInt()
                 println("The card you choose is: ${currentPlayer.showCurrentCard(cardIndex)}")
                 currentPlayer.playCard(cardIndex, currentCard!!)
+                // Computer loop logic
+            } else {
+                currentPlayer.computerMove()
             }
 
 
             // Swap current player
             currentPlayer = if (currentPlayer === players[0]) players[1] else players[0]
         }
+    }
+
+    fun updateCurrentCard(playedCard: Card) {
+        currentCard = playedCard
     }
 
     // checkForWin checks to see if either the player or the computer has an empty hand to determine if
