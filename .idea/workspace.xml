@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c0668c2-b813-4653-82b4-65bcdce1571f" name="Changes" comment="feat: add ANSI escape backgrounds to cards for readability and user experience">
+    <list default="true" id="1c0668c2-b813-4653-82b4-65bcdce1571f" name="Changes" comment="feat: added spacing and updated text for better user experience">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
     </list>
@@ -128,7 +128,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686150413300</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="feat: added spacing and updated text for better user experience">
+      <created>1686152095562</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1686152095562</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -143,7 +150,8 @@
     <MESSAGE value="feat: computer makes valid move" />
     <MESSAGE value="feat: player can draw" />
     <MESSAGE value="feat: add ANSI escape backgrounds to cards for readability and user experience" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add ANSI escape backgrounds to cards for readability and user experience" />
+    <MESSAGE value="feat: added spacing and updated text for better user experience" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: added spacing and updated text for better user experience" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -155,14 +163,6 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-function">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/Main.kt</url>
-          <properties method="main">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

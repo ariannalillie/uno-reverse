@@ -94,7 +94,7 @@ class Player(
         while (!validCardPlayed) {
             println("Your cards are: ${currentPlayer.showHand()}")
             print("Enter the index of the card you would like to play, or type -1 to draw: ")
-            var index: Int = readln().toInt()
+            val index: Int = readln().toInt()
             if (index == -1) {
                 val newCard = deck.removeAt(0)
                 drawCard(newCard)
@@ -105,6 +105,7 @@ class Player(
                 if (selectedCard.color == currentCard.color || selectedCard.type == currentCard.type) {
                     hand.removeAt(index)
                     game?.updateCurrentCard(selectedCard)
+                    game?.swapPlayer(selectedCard)
                     validCardPlayed = true
                 } else {
                     println("This is not a valid move, please try again")
@@ -113,7 +114,7 @@ class Player(
         }
     }
 
-    fun computerMove(deck: List<Card>) {
+    fun computerMove(deck: MutableList<Card>) {
         // check for playable cards
         // hand example [GREEN_NUM_5, RED_NUM_8, RED_NUM_3, YELLOW_SKIP, RED_NUM_1, YELLOW_NUM_2, BLUE_REVERSE]
         // current card YELLOW_NUM_8
@@ -123,13 +124,18 @@ class Player(
         val currentCardColor = game?.currentCard?.color
         val playableCards = hand.filter { card -> card.type == currentCardType || card.color == currentCardColor }
 
-        if (playableCards.isNotEmpty()) {
-            val cardPicked = playableCards.random()
-            game?.updateCurrentCard(cardPicked)
-            val cardIndex = hand.indexOf(cardPicked)
-            hand.removeAt(cardIndex)
-            println("The computer played $cardPicked")
-        }
+            if (playableCards.isNotEmpty()) {
+                val cardPicked = playableCards.random()
+                game?.updateCurrentCard(cardPicked)
+                val cardIndex = hand.indexOf(cardPicked)
+                hand.removeAt(cardIndex)
+                game?.swapPlayer(cardPicked)
+                println("The computer played $cardPicked")
+            } else {
+                val newCard = deck.removeAt(0)
+                drawCard(newCard)
+            }
+//        }
     }
 }
 
@@ -172,6 +178,13 @@ class Game(
 
 
             // Swap current player
+        }
+    }
+
+    fun swapPlayer(selectedCard: Card) {
+        if (selectedCard.type == CardType.REVERSE || selectedCard.type == CardType.SKIP) {
+            currentPlayer = currentPlayer
+        } else {
             currentPlayer = if (currentPlayer === players[0]) players[1] else players[0]
         }
     }
@@ -195,12 +208,12 @@ class Game(
 
 
 // NICE TO HAVES:
-    // add ASCII art or colored output to display the current card ✅
-    // Allow user to pick card in a more user-friendly way (not by index)
-    // Clear console periodically to make terminal info more readable
+// add ASCII art or colored output to display the current card ✅
+// Allow user to pick card in a more user-friendly way (not by index)
+// Clear console periodically (maybe after user chooses to draw a card) to make terminal info more readable
 
 //TODOS:
-    // Computer draw card function
-    // Add logic for special cases (reverse, draw2, draw4)
-    // Implement wild card
-    // Create a list for the cards put down in case deck runs out
+// Computer draw card function
+// Add logic for special cases (reverse, draw2, draw4)
+// Implement wild card
+// Create a list for the cards put down in case deck runs out
