@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c0668c2-b813-4653-82b4-65bcdce1571f" name="Changes" comment="feat: player can draw">
+    <list default="true" id="1c0668c2-b813-4653-82b4-65bcdce1571f" name="Changes" comment="feat: add ANSI escape backgrounds to cards for readability and user experience">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
     </list>
@@ -121,7 +121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686145759733</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="feat: add ANSI escape backgrounds to cards for readability and user experience">
+      <created>1686150413300</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1686150413300</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -135,7 +142,8 @@
     <MESSAGE value="feat: added basic check to see if players move is valid" />
     <MESSAGE value="feat: computer makes valid move" />
     <MESSAGE value="feat: player can draw" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: player can draw" />
+    <MESSAGE value="feat: add ANSI escape backgrounds to cards for readability and user experience" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add ANSI escape backgrounds to cards for readability and user experience" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

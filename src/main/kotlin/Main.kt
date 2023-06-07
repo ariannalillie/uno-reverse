@@ -104,7 +104,6 @@ class Player(
 
                 if (selectedCard.color == currentCard.color || selectedCard.type == currentCard.type) {
                     hand.removeAt(index)
-                    println("This is a valid move")
                     game?.updateCurrentCard(selectedCard)
                     validCardPlayed = true
                 } else {
@@ -161,7 +160,8 @@ class Game(
         players.forEach { player -> player.game = this }
 
         while (!gameOver) {
-            println("The current player is ${currentPlayer.name}")
+            println(" ")
+            println("Current Player: ${currentPlayer.name}")
             println("The current card on the table is: ${currentCard.toString()}")
             if (!currentPlayer.isComputer) {
                 currentPlayer.playCard(currentPlayer, currentCard!!, shuffledDeck)
@@ -194,10 +194,13 @@ class Game(
 }
 
 
-// IDEAS
+// NICE TO HAVES:
     // add ASCII art or colored output to display the current card ✅
+    // Allow user to pick card in a more user-friendly way (not by index)
+    // Clear console periodically to make terminal info more readable
 
 //TODOS:
     // Computer draw card function
     // Add logic for special cases (reverse, draw2, draw4)
     // Implement wild card
+    // Create a list for the cards put down in case deck runs out
