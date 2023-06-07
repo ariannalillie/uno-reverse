@@ -28,11 +28,11 @@ enum class CardType {
     NUM_9,
 }
 
-enum class CardColor {
-    RED,
-    YELLOW,
-    GREEN,
-    BLUE
+enum class CardColor(val textColor: String, val bgColor: String) {
+    RED("\u001B[30m", "\u001B[41m"),
+    YELLOW("\u001B[30m", "\u001B[43m"),
+    GREEN("\u001B[30m", "\u001B[42m"),
+    BLUE("\u001B[30m", "\u001B[44m"),
 }
 
 // Card class - card's color(red, green, blue, yellow) and value. wild, skip, reverse, draw 2
@@ -41,7 +41,9 @@ class Card(
     val type: CardType
 ) {
     override fun toString(): String {
-        return "${color.name}_${type.name}"
+        val reset = "\u001B[0m"
+        val formattedText = "${color.textColor}${color.bgColor}${type.name}$reset"
+        return formattedText
     }
 }
 
@@ -88,6 +90,7 @@ class Player(
     fun playCard(currentPlayer: Player, currentCard: Card, deck: MutableList<Card>) {
         var validCardPlayed = false
 
+        // user will be asked to continue to draw cards/ type a valid response until they play a valid card
         while (!validCardPlayed) {
             println("Your cards are: ${currentPlayer.showHand()}")
             print("Enter the index of the card you would like to play, or type -1 to draw: ")
@@ -192,4 +195,9 @@ class Game(
 
 
 // IDEAS
-// add ASCII art or colored output to display the current card
+    // add ASCII art or colored output to display the current card ✅
+
+//TODOS:
+    // Computer draw card function
+    // Add logic for special cases (reverse, draw2, draw4)
+    // Implement wild card
