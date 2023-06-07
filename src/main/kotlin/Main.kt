@@ -85,19 +85,33 @@ class Player(
         return hand.size
     }
 
-    fun playCard(index: Int, currentCard: Card) {
-        val selectedCard = hand[index]
+    fun playCard(currentPlayer: Player, currentCard: Card, deck: MutableList<Card>) {
+        var validCardPlayed = false
 
-        if (selectedCard.color == currentCard.color || selectedCard.type == currentCard.type) {
-            hand.removeAt(index)
-            println("This is a valid move")
-            game?.updateCurrentCard(selectedCard)
-        } else {
-            println("This is not a valid move")
+        while (!validCardPlayed) {
+            println("Your cards are: ${currentPlayer.showHand()}")
+            print("Enter the index of the card you would like to play, or type -1 to draw: ")
+            var index: Int = readln().toInt()
+            if (index == -1) {
+                val newCard = deck.removeAt(0)
+                drawCard(newCard)
+            } else {
+                println("The card you choose is: ${currentPlayer.showCurrentCard(index)}")
+                val selectedCard = hand[index]
+
+                if (selectedCard.color == currentCard.color || selectedCard.type == currentCard.type) {
+                    hand.removeAt(index)
+                    println("This is a valid move")
+                    game?.updateCurrentCard(selectedCard)
+                    validCardPlayed = true
+                } else {
+                    println("This is not a valid move, please try again")
+                }
+            }
         }
     }
 
-    fun computerMove() {
+    fun computerMove(deck: List<Card>) {
         // check for playable cards
         // hand example [GREEN_NUM_5, RED_NUM_8, RED_NUM_3, YELLOW_SKIP, RED_NUM_1, YELLOW_NUM_2, BLUE_REVERSE]
         // current card YELLOW_NUM_8
@@ -112,7 +126,7 @@ class Player(
             game?.updateCurrentCard(cardPicked)
             val cardIndex = hand.indexOf(cardPicked)
             hand.removeAt(cardIndex)
-            println("NEW HAND: $hand")
+            println("The computer played $cardPicked")
         }
     }
 }
@@ -124,11 +138,11 @@ class Game(
     var currentPlayer = players[0]
     var gameOver = false
     var currentCard: Card? = null
+    val deck = createDeck()
+    val shuffledDeck = shuffleDeck(deck)
 
     // startGame creates a deck, shuffles it and then deals 7 cards to each player
     fun setUpGame() {
-        val deck = createDeck()
-        val shuffledDeck = shuffleDeck(deck)
 
         for (player in players) {
             var count = 0
@@ -147,14 +161,10 @@ class Game(
             println("The current player is ${currentPlayer.name}")
             println("The current card on the table is: ${currentCard.toString()}")
             if (!currentPlayer.isComputer) {
-                println("Your cards are: ${currentPlayer.showHand()}")
-                print("Enter the index of the card you would like to play, or type -1 to draw: ")
-                val cardIndex: Int = readln().toInt()
-                println("The card you choose is: ${currentPlayer.showCurrentCard(cardIndex)}")
-                currentPlayer.playCard(cardIndex, currentCard!!)
+                currentPlayer.playCard(currentPlayer, currentCard!!, shuffledDeck)
                 // Computer loop logic
             } else {
-                currentPlayer.computerMove()
+                currentPlayer.computerMove(shuffledDeck)
             }
 
 
