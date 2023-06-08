@@ -115,27 +115,22 @@ class Player(
     }
 
     fun computerMove(deck: MutableList<Card>) {
-        // check for playable cards
-        // hand example [GREEN_NUM_5, RED_NUM_8, RED_NUM_3, YELLOW_SKIP, RED_NUM_1, YELLOW_NUM_2, BLUE_REVERSE]
-        // current card YELLOW_NUM_8
-        // 3 playable cards: RED_NUM_8, YELLOW_SKIP, YELLOW_NUM_2
         // EASY: finds three playable cards and randomly chooses one
         val currentCardType = game?.currentCard?.type
         val currentCardColor = game?.currentCard?.color
         val playableCards = hand.filter { card -> card.type == currentCardType || card.color == currentCardColor }
 
-            if (playableCards.isNotEmpty()) {
-                val cardPicked = playableCards.random()
-                game?.updateCurrentCard(cardPicked)
-                val cardIndex = hand.indexOf(cardPicked)
-                hand.removeAt(cardIndex)
-                game?.swapPlayer(cardPicked)
-                println("The computer played $cardPicked")
-            } else {
-                val newCard = deck.removeAt(0)
-                drawCard(newCard)
-            }
-//        }
+        if (playableCards.isNotEmpty()) {
+            val cardPicked = playableCards.random()
+            game?.updateCurrentCard(cardPicked)
+            val cardIndex = hand.indexOf(cardPicked)
+            hand.removeAt(cardIndex)
+            game?.swapPlayer(cardPicked)
+            println("The computer played $cardPicked")
+        } else {
+            val newCard = deck.removeAt(0)
+            drawCard(newCard)
+        }
     }
 }
 
@@ -146,8 +141,12 @@ class Game(
     var currentPlayer = players[0]
     var gameOver = false
     var currentCard: Card? = null
-    val deck = createDeck()
-    val shuffledDeck = shuffleDeck(deck)
+    // Used as lazy property delegate so that the deck will be created only when it is
+    // accessed for the first time
+    val deck: List<Card> by lazy { createDeck() }
+    // Used as lazy property delegate so that the shuffledDeck will be created only when
+    // it is accessed for the first time
+    val shuffledDeck: MutableList<Card> by lazy { shuffleDeck(deck) }
 
     // startGame creates a deck, shuffles it and then deals 7 cards to each player
     fun setUpGame() {
@@ -166,9 +165,13 @@ class Game(
         players.forEach { player -> player.game = this }
 
         while (!gameOver) {
+//            if (!repeatedTurn) {
             println(" ")
             println("Current Player: ${currentPlayer.name}")
             println("The current card on the table is: ${currentCard.toString()}")
+//            } else {
+//                println("The computer drew a card")
+//            }
             if (!currentPlayer.isComputer) {
                 currentPlayer.playCard(currentPlayer, currentCard!!, shuffledDeck)
                 // Computer loop logic
@@ -214,6 +217,9 @@ class Game(
 
 //TODOS:
 // Computer draw card function
-// Add logic for special cases (reverse, draw2, draw4)
+// Add logic for special cases (reverse, draw2, draw4, skip)
 // Implement wild card
 // Create a list for the cards put down in case deck runs out
+
+//BUGS:
+// Errors out of users input in NaN

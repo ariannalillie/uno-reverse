@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c0668c2-b813-4653-82b4-65bcdce1571f" name="Changes" comment="feat: added spacing and updated text for better user experience">
+    <list default="true" id="1c0668c2-b813-4653-82b4-65bcdce1571f" name="Changes" comment="feat: implemented functionality for skip and reverse">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
     </list>
@@ -135,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686152095562</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="feat: implemented functionality for skip and reverse">
+      <created>1686159271237</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1686159271237</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -151,7 +158,8 @@
     <MESSAGE value="feat: player can draw" />
     <MESSAGE value="feat: add ANSI escape backgrounds to cards for readability and user experience" />
     <MESSAGE value="feat: added spacing and updated text for better user experience" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: added spacing and updated text for better user experience" />
+    <MESSAGE value="feat: implemented functionality for skip and reverse" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: implemented functionality for skip and reverse" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
