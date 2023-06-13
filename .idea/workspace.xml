@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c0668c2-b813-4653-82b4-65bcdce1571f" name="Changes" comment="feat: implemented functionality for skip and reverse">
+    <list default="true" id="1c0668c2-b813-4653-82b4-65bcdce1571f" name="Changes" comment="feat: add property delegate to lazily initialize deck and shuffledDeck">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
     </list>
@@ -142,7 +142,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686159271237</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="feat: add property delegate to lazily initialize deck and shuffledDeck">
+      <created>1686236152143</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1686236152143</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -159,7 +166,8 @@
     <MESSAGE value="feat: add ANSI escape backgrounds to cards for readability and user experience" />
     <MESSAGE value="feat: added spacing and updated text for better user experience" />
     <MESSAGE value="feat: implemented functionality for skip and reverse" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: implemented functionality for skip and reverse" />
+    <MESSAGE value="feat: add property delegate to lazily initialize deck and shuffledDeck" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add property delegate to lazily initialize deck and shuffledDeck" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -171,6 +179,22 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-function">
+          <url>file://$PROJECT_DIR$/src/main/kotlin/Main.kt</url>
+          <properties method="main">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-function">
+          <url>file://$PROJECT_DIR$/src/main/kotlin/Main.kt</url>
+          <properties method="main">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
